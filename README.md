@@ -2,6 +2,8 @@
 
 A local restaurant administration prototype with fictional data. It explores a redesigned service dashboard and the surrounding operational workflows. It does not connect to the production site.
 
+**[Open the public prototype library](https://kevinkickback.github.io/clairexdaniel-admin-prototype/)** to compare all three designs. Visitors can use the demos without a GitHub account; mock edits stay in their own browser.
+
 ## Run locally
 
 Requires Node.js. No dependency installation or build step is needed.
@@ -85,13 +87,13 @@ This design uses horizontal section navigation and a second row for the current 
 
 On phones, navigation rows and the time board scroll within their own regions. Active section/tool links scroll into view horizontally without moving the page vertically. The board supports keyboard access to offscreen parties and booking buttons. The existing dialogs retain Escape and focus recovery. No sidebar or mobile navigation overlay is used in this design.
 
-The active implementation is on `prototype/service-studio`, checkpoint `prototype-v3`. Before starting a fourth design, pin the `service-studio` gallery entry to that tag and add a new working-tree entry. The earlier checkpoint tags remain untouched.
+The development checkpoint is on `prototype/service-studio`, tag `prototype-v3`. The published gallery on `main` now pins all three designs to their checkpoint tags. To start a fourth design, create a separate branch and add a new working-tree entry. The earlier checkpoint tags remain untouched.
 
 Prototype 1’s library header link is added during packaging via `legacyLibraryLink`, with a guard that requires exactly one compatible header. This keeps its original source tag intact while updating the version shown in the library. Gallery screenshots are read from the current manifest checkout, independently of the pinned application ref, so documentation and shared header updates can be reflected without changing a frozen source tag.
 
-## Prototype library and future GitHub Pages hosting
+## GitHub Pages publication
 
-**Publication is on hold. Keep this repository private and Pages disabled until the owner explicitly approves launch.** Making the repository public exposes its tracked files and Git history immediately, independently of Pages. Review the entire history before that change; deleting a file in the latest commit does not remove it from history.
+The owner approved making this repository and its three-prototype gallery public. The repository contents and reachable history were reviewed before launch: no credentials, private runtime files, or retained customer identities were found. Existing Git author metadata is part of the public history.
 
 Prepare and rehearse the static site locally:
 
@@ -102,8 +104,8 @@ npm run preview:pages
 
 Open <http://127.0.0.1:5174/clairexdaniel-admin-prototype/>. This second server stays on the local machine; the existing private dashboard preview on port 5173 is unchanged. Neither command publishes anything.
 
-`prototypes.json` controls the gallery. The current Service desk entry reads the frozen `prototype-v1` Git tag. To add a variation, create a separate branch/worktree, then add an entry with a unique `id`, its Git branch/tag/commit in `ref`, and a tracked screenshot under `artifacts/`. Use `working-tree` for a design currently being edited in this checkout. Fetch any required remote refs before building; a future Actions checkout must fetch full history and tags.
+`prototypes.json` controls the gallery. Service desk reads `prototype-v1`, Calm service reads `prototype-v2.1`, and Service studio reads `prototype-v3`. To add a variation, create a separate branch/worktree, then add an entry with a unique `id`, its Git branch/tag/commit in `ref`, and a tracked screenshot under `artifacts/`. Use `working-tree` while editing. Pin the reviewed design to a new checkpoint before publishing. The Actions checkout fetches full history and tags so every frozen prototype can be built.
 
-The build copies an explicit list of browser assets into ignored `dist/`, adapts paths for Pages, removes development refresh, and gives each design a separate browser-storage key. It does not copy repository notes, development tools, or credentials. The prototype remains fully client-side; no server or production connection is required for the eventual Pages site.
+The build copies an explicit list of browser assets into ignored `dist/`, adapts paths for Pages, removes development refresh, and gives each design a separate browser-storage key. It does not copy repository notes, development tools, or credentials into the website. The prototype is fully client-side; GitHub Pages does not need the host computer or local server to remain running.
 
-When the owner approves launch, review repository contents/history, make this one repository public, and configure a Pages workflow to test, build, and deploy **only `dist/`**. No deployment workflow is installed yet. Publishing the static demo makes its frontend code viewable, and a public repository makes the complete committed source/history viewable. Continue reviewing future commits for private material.
+`.github/workflows/pages.yml` tests, checks, builds, and deploys **only `dist/`** on pushes to `main` or a manual workflow run. Its official GitHub actions are pinned to commit revisions. Deployment uses the built-in workflow token and GitHub OIDC; no personal deployment token is stored in the repository. Keep new design work on prototype branches until the owner approves a public update, then merge the reviewed gallery changes to `main`. Continue reviewing commits for private material before pushing to this public repository.

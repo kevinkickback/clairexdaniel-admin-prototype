@@ -23,7 +23,7 @@
       "title": "Service studio",
       "description": "A full-width service board organized by time, with horizontal navigation and direct access to every party and restaurant tool.",
       "label": "Prototype 03 · Horizontal workspace",
-      "ref": "working-tree",
+      "ref": "prototype-v3",
       "screenshot": "artifacts/service-studio-desktop.jpg",
       "files": ["shell.js", "studio.css", "images/dining-room.png", "images/seasonal-menu.png"]
     }

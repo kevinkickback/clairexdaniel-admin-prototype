@@ -174,3 +174,29 @@ service-studio-mobile.jpg. The private server/tunnel remain on port 5173. Rebuil
 dist with npm run build:pages after changes. No publishing/visibility change is
 authorized; keep this repository and its preview private, and never touch the live
 restaurant admin page. This project still has no native Gears binding.
+
+PUBLICATION APPROVED (2026-10-28)
+The owner explicitly requested making this one repository public and setting up
+GitHub Pages. This supersedes the earlier publication holds. No additional
+confirmation is required for this launch. The live restaurant admin restriction
+remains unchanged: never interact with production controls.
+
+main was fast-forwarded to the completed Prototype 3 history, then prepared for
+Pages. All three entries are pinned: prototype-v1, prototype-v2.1, prototype-v3.
+The existing design branches and tags remain intact. The deployment workflow
+tests/checks/builds and publishes only dist on main pushes or manual dispatch.
+It fetches full history and tags and uses official GitHub actions pinned to
+commit revisions, Node 24, and the built-in Pages/OIDC credentials.
+
+Review of all five existing reachable commits checked 79 blobs (63 text blobs):
+no credential matches or private runtime paths were found. Email domains in
+tracked file content were example.com and example.invalid only; the original
+walkthrough inventory retains features/controls rather than customer identities.
+All captured dashboard previews use fictional seed data. Existing Git author
+metadata is part of the published repository history. No history rewrite needed.
+
+Public library URL: https://kevinkickback.github.io/clairexdaniel-admin-prototype/
+Repository: https://github.com/kevinkickback/clairexdaniel-admin-prototype
+Future work: prototype branches are for exploration; main pushes publish the
+public gallery, so merge reviewed changes only after owner authorization. Keep
+the native bindings policy: this project has no Gears binding; do not initialize.
