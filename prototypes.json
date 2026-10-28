@@ -1,0 +1,12 @@
+{
+  "prototypes": [
+    {
+      "id": "service-desk",
+      "title": "Service desk",
+      "description": "Daily service and restaurant operations in one workspace. Explore reservations, menus, memberships, and the tools around them.",
+      "label": "Original baseline",
+      "ref": "prototype-v1",
+      "screenshot": "artifacts/dashboard-desktop.jpg"
+    }
+  ]
+}

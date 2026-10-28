@@ -61,3 +61,22 @@ The existing site uses Next.js before authentication and Angular after authentic
 Unseen forms and business rules are proposed mock flows that need validation against the real application. Payments, authentication, email, subscription eligibility, and background hold expiry are not connected. Hold expiry times are informational; cancellation holds and no-show fees are configurable simulations.
 
 The live admin site must remain untouched during prototype work. Preserve the original functional inventory when developing variations.
+
+## Prototype library and future GitHub Pages hosting
+
+**Publication is on hold. Keep this repository private and Pages disabled until the owner explicitly approves launch.** Making the repository public exposes its tracked files and Git history immediately, independently of Pages. Review the entire history before that change; deleting a file in the latest commit does not remove it from history.
+
+Prepare and rehearse the static site locally:
+
+```sh
+npm run build:pages
+npm run preview:pages
+```
+
+Open <http://127.0.0.1:5174/clairexdaniel-admin-prototype/>. This second server stays on the local machine; the existing private dashboard preview on port 5173 is unchanged. Neither command publishes anything.
+
+`prototypes.json` controls the gallery. The current Service desk entry reads the frozen `prototype-v1` Git tag. To add a variation, create a separate branch/worktree, then add an entry with a unique `id`, its Git branch/tag/commit in `ref`, and a tracked screenshot under `artifacts/`. Use `working-tree` for a design currently being edited in this checkout. Fetch any required remote refs before building; a future Actions checkout must fetch full history and tags.
+
+The build copies an explicit list of browser assets into ignored `dist/`, adapts paths for Pages, removes development refresh, and gives each design a separate browser-storage key. It does not copy repository notes, development tools, or credentials. The prototype remains fully client-side; no server or production connection is required for the eventual Pages site.
+
+When the owner approves launch, review repository contents/history, make this one repository public, and configure a Pages workflow to test, build, and deploy **only `dist/`**. No deployment workflow is installed yet. Publishing the static demo makes its frontend code viewable, and a public repository makes the complete committed source/history viewable. Continue reviewing future commits for private material.

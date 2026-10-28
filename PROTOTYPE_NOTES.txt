@@ -56,3 +56,29 @@ Do not interact with the live admin page. The original walkthrough was read-only
 the owner deferred edit-form inspection as a guest admin. Use the documented
 inventory and mock prototype until real source or additional details are provided.
 No native .gears/project.yaml binding exists. Do not initialize Gears automatically.
+
+PAGES AND VARIATIONS (2026-10-28)
+Private source repository: kevinkickback/clairexdaniel-admin-prototype.
+main is backed up to GitHub; prototype-v1 preserves the original implementation.
+GitHub rejected Pages for the private repository with HTTP 422 because the current
+plan does not support it. No Pages site was created. The owner does not want any
+public availability until ready to show it. Recommendation: keep this one repo
+private now, then review its history, make it public, and enable Pages together
+only after explicit launch approval. Never change visibility as part of prep.
+
+npm run build:pages produces a gallery and static app copies in ignored dist/.
+npm run preview:pages rehearses the Pages subpath on local port 5174. Nothing
+publishes automatically. prototypes.json pins the current design to prototype-v1;
+future entries can read a branch/tag/commit or the current working tree. Keep the
+baseline tag unchanged. Each gallery design has isolated browser-local edits.
+Source/history must be reviewed before making the repo public, including the
+walkthrough inventory and notes. Browser-only output excludes those documents.
+No GitHub Pages deployment workflow exists yet. Keep the existing private server
+and tunnel available while the owner reviews. Further design variations need an
+agreed direction; do not invent completed alternatives in the gallery.
+Validation: all 18 automated checks and syntax checks pass. Browser QA confirmed
+the gallery opens the frozen app under the Pages project subpath, the reservation
+form opens without console errors, and the gallery fits a phone viewport without
+page overflow. Screenshot: artifacts/prototype-library.jpg. No mock records were
+changed during this pass. The temporary port-5174 QA server can be stopped; the
+owner's original private port-5173 preview must remain available.
