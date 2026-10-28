@@ -120,3 +120,18 @@ and calm-service-mobile.jpg. Keep the private server and existing tunnel running
 Checkpoint tag: prototype-v2. For a third design, pin the calm-service gallery
 entry to that tag before changing public/, and add a new working-tree entry.
 Also verified the disclosed reservation filters stay within a 320px viewport.
+
+PROTOTYPE 02 COLOR REFINEMENT (2026-10-28)
+Owner requested colored individual service-summary cards, stronger contrast, and
+a more distinct style from the first prototype. Current direction: dark ink-blue
+navigation, amber active item, neutral light workspace, sans-serif headings, and
+deep-blue / pale-blue / warm-amber summary cards. Existing layout, mock data,
+routes, interactions, and generated photos remain. Only markup and CSS changed.
+Each entire summary card still links to its tool. Measured label/note/value text
+contrast is 6.06 to 9.96:1 across the three cards. Hover lift/arrow motion honors
+reduced motion. Browser checks verified all three destinations, keyboard Tab to
+the next card, no document/card overflow at 320px, and no console errors.
+Desktop/mobile snapshots and the private library were refreshed.
+Current checkpoint is prototype-v2.1; keep prior v1 and v2 tags unchanged.
+For a third prototype, pin calm-service to prototype-v2.1, not the earlier v2 tag.
+Keep publication off and the existing private dev server/tunnel running.

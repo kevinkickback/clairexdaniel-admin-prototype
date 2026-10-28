@@ -70,11 +70,13 @@ The live admin site must remain untouched during prototype work. Preserve the or
 
 This variation keeps all 17 screens and the existing mock workflows. The overview prioritizes three service totals and a short reservation list. Seating by time and restaurant-wide insights open on demand. Native navigation disclosures group the less frequent tools; dietary notes remain visible in guest rows. Reservation filters and optional guest preferences are also disclosed when needed, with existing preferences expanded when editing.
 
+Its visual direction uses ink-blue navigation, an amber active item, sans-serif headings, and three individual summary cards in deep blue, pale blue, and warm amber. Card labels and supporting text measure at least 6:1 contrast against their backgrounds. Card links remain keyboard accessible; hover motion is removed for reduced-motion preferences. The layout has been checked down to a 320px viewport.
+
 Images appear in the selected-service context and the Mediterranean menu preview. These are generated concept images, not photographs of the actual restaurant or its actual food. The saved asset paths, full prompts, and generation method are in `artifacts/image-prompts.txt`.
 
-The active implementation lives on `prototype/calm-service`, with checkpoint tag `prototype-v2`; `prototype-v1` remains unchanged. The root development preview and the packaged gallery version use separate storage, so they can be tried independently. The second design has been checked for booking creation/editing, optional notes, prep-sheet propagation, filtering, menu editing, image loading, mobile layout, and keyboard containment in the grouped mobile navigation.
+The active implementation lives on `prototype/calm-service`, with current checkpoint tag `prototype-v2.1`; the original `prototype-v2` checkpoint and `prototype-v1` remain unchanged. The root development preview and the packaged gallery version use separate storage, so they can be tried independently. The second design has been checked for booking creation/editing, optional notes, prep-sheet propagation, filtering, menu editing, image loading, mobile layout, and keyboard containment in the grouped mobile navigation.
 
-Before starting a third design, pin the `calm-service` gallery entry to `prototype-v2`, then add a separate entry with `ref: "working-tree"`. This keeps both completed designs intact as the next one changes.
+Before starting a third design, pin the `calm-service` gallery entry to `prototype-v2.1`, then add a separate entry with `ref: "working-tree"`. This keeps both completed designs intact as the next one changes.
 
 ## Prototype library and future GitHub Pages hosting
 
