@@ -1,0 +1,13 @@
+{
+  "name": "daniel-claire-admin-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check server.mjs && node --check public/app.js && node --check public/views.js && node --check public/ui.js && node --check public/domain.js && node --check public/mock-data.js && node --check public/exports.js"
+  },
+  "description": "Local restaurant administration prototype. Fictional data; no external services."
+}

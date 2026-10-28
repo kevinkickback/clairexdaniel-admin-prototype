@@ -1,0 +1,104 @@
+{
+  "project": "claireXdaniel",
+  "date": "2026-10-28",
+  "mode": "local mock prototype",
+  "productionAccess": false,
+  "framework": "Buildless HTML, CSS, and JavaScript ES modules; Node development server",
+  "integrationContext": {
+    "preAuth": "Next.js",
+    "postAuth": "Angular",
+    "migrationPerformed": false
+  },
+  "screens": [
+    "overview",
+    "reservations",
+    "availability",
+    "waitlist",
+    "cancellations",
+    "holds",
+    "prep-sheet",
+    "menu-blocks",
+    "slots",
+    "users",
+    "memberships",
+    "membership-plans",
+    "cms",
+    "reviews",
+    "private-events",
+    "analytics",
+    "logs"
+  ],
+  "preservation": [
+    "Menu and date context",
+    "Search, filters, grouping, pagination",
+    "Booking create/edit and course selection",
+    "Private admin notes",
+    "Kitchen-view indicator",
+    "No-show/cancellation actions with mock confirmations",
+    "Capacity and explicit overbooking",
+    "Waitlist views and conversion",
+    "Temporary holds and conversion",
+    "Menu categories, active/release states and slot capacities",
+    "Membership status, plans and allowances",
+    "Policies, reviews and private events",
+    "Prep columns, guest orders, dietary notes, subtotals and export/print",
+    "Analytics, change log, account and notifications",
+    "Restaurant-wide guest count and seven-day guest growth",
+    "Distinct people, total requests, and seven-day waitlist request growth",
+    "Per-menu booked seats against configured total capacity"
+  ],
+  "automatedTests": {
+    "passed": 13,
+    "syntaxChecks": "passed"
+  },
+  "browserVerified": [
+    "Reservation create and totals",
+    "Search and detail view",
+    "Course and private-note edits reflected in prep",
+    "Simulated no-show confirmation and charge",
+    "Hold conversion",
+    "Waitlist conversion and closed status",
+    "Membership plan create and grant",
+    "Review publishing",
+    "CMS save",
+    "Private event creation",
+    "Overbooking validation error",
+    "Mobile navigation focus wrap, Escape and recovery",
+    "390px layout without page-wide overflow",
+    "Excel download with independent ZIP CRC and XML validation"
+  ],
+  "assumedFlows": [
+    "Unseen edit forms",
+    "No-show fee and payment rules",
+    "Cancellation auto-hold behavior",
+    "Membership grant and billing semantics",
+    "Guest profiles",
+    "CMS schema",
+    "Review moderation",
+    "Private event workflow"
+  ],
+  "notConnected": [
+    "Production APIs",
+    "Authentication",
+    "Payments",
+    "Email",
+    "Subscription enforcement",
+    "Background hold expiry"
+  ],
+  "server": {
+    "url": "http://127.0.0.1:5173",
+    "command": "npm.cmd run dev",
+    "liveRefresh": true,
+    "remoteForwarding": "Private port forwarding supported; current runtime details belong in ignored .preview/tunnel.json."
+  },
+  "handoff": "PROTOTYPE_NOTES.txt",
+  "storage": "Versioned browser localStorage; reset through footer or account menu",
+  "gearsBindingPresent": false,
+  "finalDemoState": "Restored seed data; Wednesday October 28, 2026",
+  "remoteVerification": {
+    "anonymousHttpStatus": 302,
+    "authenticatedHttpStatus": 200,
+    "appScriptHttpStatus": 200,
+    "scope": "Temporary owner-authenticated preview of port 5173 only"
+  }
+}

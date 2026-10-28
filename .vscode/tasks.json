@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [{
+    "label": "Preview restaurant admin",
+    "type": "shell",
+    "command": "node server.mjs",
+    "isBackground": true,
+    "problemMatcher": {
+      "owner": "prototype",
+      "pattern": { "regexp": "^(UNUSED)$", "message": 1 },
+      "background": { "activeOnStart": true, "beginsPattern": "Restaurant admin prototype", "endsPattern": "Local: http" }
+    },
+    "presentation": { "reveal": "always", "panel": "dedicated" }
+  }]
+}

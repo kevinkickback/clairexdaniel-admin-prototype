@@ -1,0 +1,5 @@
+{
+  "remote.portsAttributes": {
+    "5173": { "label": "Restaurant admin prototype", "onAutoForward": "notify" }
+  }
+}

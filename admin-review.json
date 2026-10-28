@@ -1,0 +1,437 @@
+{
+  "project": "claireXdaniel",
+  "reviewDate": "2026-10-28",
+  "purpose": "Inventory the existing admin panel before redesign so functionality is preserved.",
+  "status": "Initial read-only discovery pass complete. Four navigation groups and fourteen views documented. No website implementation started; edit forms and hidden behaviors deferred.",
+  "constraints": [
+    "Do not interact with live page elements: no clicking, typing, hovering, scrolling, navigation, submissions, or changes by the agent.",
+    "User handles login and all navigation. Agent may read page structure and capture screenshots.",
+    "Record interface fields and functions rather than customer identities or reservation data.",
+    "Do not treat visible controls as proof of successful backend behavior.",
+    "User is a guest admin and has deferred reservation edit forms because they are uncomfortable opening them. Do not request edit-form interaction again unless the user offers it; obtain that information later."
+  ],
+  "sources": {
+    "browser": "ChatGPT in-app browser",
+    "origin": "https://danielxclaire.com",
+    "evidence": [
+      "Screenshots",
+      "Complete accessibility trees including link destinations",
+      "Read-only DOM inspection of script URLs and form/control metadata; no input values read"
+    ],
+    "applicationSourceAvailableLocally": false,
+    "gearsBindingPresent": false,
+    "clientBundle": "main.9f6be81d495429d7.js",
+    "sourceRepositorySearch": "Connected GitHub repository search for claire returned no matches.",
+    "clientFramework": "Angular 20.3.25 with Ionic (APP-ROOT, ION-APP, ION-ROUTER-OUTLET observed in DOM)",
+    "domCaveat": "DOM contains cached controls from other views, including search and login field metadata. Presence in the DOM does not establish visibility on the current screen."
+  },
+  "sharedShell": [
+    "Page heading",
+    "Dashboard/home or back control",
+    "Notifications with count",
+    "Account menu"
+  ],
+  "screens": [
+    {
+      "name": "Manage dashboard",
+      "observedAt": "/admin",
+      "features": [
+        "Navigation groups: Reservations, Menus & Slots, Membership, CMS",
+        "Reservation group: Reservations, Waitlist, Cancellations, Holds, Prep Sheet",
+        "Summary links: Guests yet to serve, Seats available, Users, People on waitlist",
+        "Guest summary includes reservation and booked-menu totals and menu context",
+        "Capacity summary includes total capacity and full-block state",
+        "Users and waitlist summaries include change in the last seven days",
+        "Per-menu analytics summaries with seats sold, reservations, and active/inactive indicators",
+        "User & Menu Analytics: courses, allergies, occasions, waitlist",
+        "View change log"
+      ],
+      "routes": [
+        "/admin/dashboard",
+        "/admin/reservations",
+        "/admin/reservations/availability",
+        "/admin/users",
+        "/admin/waitlist",
+        "/admin/analytics/menu",
+        "/admin/cancellations",
+        "/admin/holds",
+        "/admin/prep-sheet",
+        "/admin/logs"
+      ],
+      "layout": "Header above a left navigation panel and right summary/analytics grid.",
+      "unresolved": [
+        "Definition and scope of each metric; dashboard and reservation-list totals differ",
+        "Whether per-menu analytics links pass additional menu context",
+        "Notification and account menu options"
+      ]
+    },
+    {
+      "name": "Reservations list",
+      "observedAt": "/admin/reservations",
+      "features": [
+        "Current menu and Past menus views",
+        "Create reservation entry point",
+        "Today's reservations entry point",
+        "Availability entry point",
+        "Search by name or phone",
+        "Reservation count",
+        "Reservations grouped by service date and time slot",
+        "Guest totals for dates and time slots",
+        "Reservation rows link to individual detail views",
+        "Party size and confirmation status per reservation",
+        "Kitchen-view lock marker on some reservations",
+        "Pagination with current page and page count"
+      ],
+      "routes": [
+        "/admin/reservations/past",
+        "/admin/reservations/new",
+        "/admin/reservations/today",
+        "/admin/reservations/availability",
+        "/admin/reservations/{reservationId}"
+      ],
+      "layout": "Centered single-column list with view tabs, stacked entry buttons, search, and grouped reservation cards.",
+      "unresolved": [
+        "Reservation detail and edit fields/actions",
+        "Other reservation statuses",
+        "Meaning and behavior of kitchen-view lock marker",
+        "Creation, past-menu, today, and availability views",
+        "Search behavior and pagination behavior"
+      ]
+    },
+    {
+      "name": "Reservation detail",
+      "observedAt": "/admin/reservations/{reservationId}",
+      "fields": [
+        "Guest name",
+        "Confirmation status",
+        "Date",
+        "Time",
+        "Party size",
+        "Email contact link",
+        "Telephone contact link",
+        "Occasion",
+        "Allergies"
+      ],
+      "actions": [
+        "Edit reservation",
+        "Edit main courses",
+        "Cancel reservation",
+        "No-show: cancel and charge"
+      ],
+      "routes": [
+        "/admin/reservations/{reservationId}/edit",
+        "/admin/reservations/{reservationId}/courses",
+        "/admin/reservations/{reservationId}/cancel"
+      ],
+      "layout": "Guest heading/status, booking details card, guest details card, four stacked action buttons.",
+      "unresolved": [
+        "Editable reservation fields",
+        "Course-selection behavior",
+        "Cancellation options",
+        "No-show confirmation and charge rules"
+      ]
+    },
+    {
+      "name": "Manage: Menus & Slots navigation",
+      "observedAt": "/admin (Menus & Slots tab selected)",
+      "features": [
+        "Menu Blocks overview link",
+        "Time Slots overview link",
+        "Shared summary cards and analytics remain visible",
+        "View change log remains available"
+      ],
+      "routes": [
+        "/admin/menu-blocks",
+        "/admin/slots"
+      ],
+      "layout": "Only the left navigation panel changes with the selected navigation group; the right dashboard summaries remain.",
+      "unresolved": [
+        "Menu block list structure",
+        "Time slot list structure"
+      ]
+    },
+    {
+      "name": "Menu Blocks list",
+      "observedAt": "/admin/menu-blocks",
+      "features": [
+        "Public, Private, and Pop-up category tabs",
+        "Active/inactive status",
+        "Pre-release/open status",
+        "Service date count",
+        "Capacity per slot",
+        "Release date/time metadata",
+        "Menu rows link directly to edit forms",
+        "Delete block button per row",
+        "New menu block entry point"
+      ],
+      "routes": [
+        "/admin/menu-blocks/{blockId}/edit",
+        "/admin/menu-blocks/create"
+      ],
+      "layout": "Category pills above a single list card; per-row status badges and delete icon; create button below.",
+      "unresolved": [
+        "Private and Pop-up lists not inspected",
+        "Edit/create/delete behavior deferred; no interactions performed"
+      ]
+    },
+    {
+      "name": "Time Slots list",
+      "observedAt": "/admin/slots",
+      "features": [
+        "Configured service time list",
+        "Each time slot links directly to an edit form",
+        "Add time slot entry point"
+      ],
+      "routes": [
+        "/admin/slots/{slotId}/edit",
+        "/admin/slots/create"
+      ],
+      "layout": "Single list card with time rows and an add button below.",
+      "unresolved": [
+        "Edit/create fields and validation deferred"
+      ]
+    },
+    {
+      "name": "Manage: Membership navigation",
+      "observedAt": "/admin (Membership tab selected)",
+      "features": [
+        "Memberships overview link",
+        "Membership plans overview link",
+        "Shared dashboard metrics and change log"
+      ],
+      "routes": [
+        "/admin/memberships",
+        "/admin/membership-plans"
+      ]
+    },
+    {
+      "name": "Memberships list",
+      "observedAt": "/admin/memberships",
+      "features": [
+        "Search by owner name or email",
+        "Active and Cancelled views",
+        "Filter by membership plan",
+        "Plan name and membership status",
+        "Owner name",
+        "Expiry/non-expiring state",
+        "Issue date",
+        "Rows link to user membership details"
+      ],
+      "routes": [
+        "/admin/users/{userId}/membership"
+      ],
+      "layout": "Search, status tabs, plan selector, and a single-column member list.",
+      "unresolved": [
+        "Cancelled view behavior",
+        "Membership detail actions and plan rules deferred"
+      ]
+    },
+    {
+      "name": "Membership plans list",
+      "observedAt": "/admin/membership-plans",
+      "features": [
+        "Plan name and active status",
+        "Grant method",
+        "Displayed renewal/duration metadata",
+        "Price",
+        "Seat allowance",
+        "Per-menu allowance",
+        "Early booking access window",
+        "Plan rows link directly to edit forms",
+        "New plan entry point"
+      ],
+      "routes": [
+        "/admin/membership-plans/{planId}/edit",
+        "/admin/membership-plans/create"
+      ],
+      "layout": "Plan summary list with a new-plan button below.",
+      "unresolved": [
+        "Meaning of raw none field in current plan summary",
+        "Plan validation and entitlement enforcement; edit form deferred"
+      ]
+    },
+    {
+      "name": "Manage: CMS navigation",
+      "observedAt": "/admin (CMS tab selected)",
+      "features": [
+        "CMS content entry point",
+        "Reservation policy",
+        "Cancellation policy",
+        "Late-cancel window",
+        "Skip holds on cancel",
+        "Reviews",
+        "Private Events",
+        "View change log"
+      ],
+      "routes": [
+        "/admin/cms",
+        "/admin/cms/reservation-policy",
+        "/admin/cms/cancellation-policy",
+        "/admin/cms/late-cancel",
+        "/admin/cms/suppress-holds",
+        "/admin/reviews",
+        "/admin/private-events",
+        "/admin/logs"
+      ],
+      "unresolved": [
+        "Content editing and policy-setting controls deferred",
+        "Reviews and Private Events list/details not yet inspected"
+      ]
+    },
+    {
+      "name": "Waitlist",
+      "observedAt": "/admin/waitlist",
+      "features": [
+        "All, By day, and By guest views",
+        "Day selector with remaining-day choices",
+        "Search by name or phone",
+        "Entry count",
+        "Date-grouped entries",
+        "Guest name, requested time or any-time flexibility, party size, phone, optional note, and open status",
+        "Pagination"
+      ],
+      "routes": [
+        "/admin/waitlist/groups",
+        "/admin/waitlist/by-user"
+      ],
+      "layout": "View tabs, day filter, search, and date-grouped full-width rows.",
+      "unresolved": [
+        "Grouped By day and By guest screen details",
+        "Waitlist entry actions and status transitions not exercised",
+        "Possible repeated entries may represent distinct dates/requests; no deduplication assumptions"
+      ]
+    },
+    {
+      "name": "Availability",
+      "observedAt": "/admin/reservations/availability",
+      "features": [
+        "Live/automatic update indicator",
+        "Service dates with date-specific seats-per-slot capacity",
+        "Time slot grid",
+        "Remaining seats and total capacity",
+        "Available, reduced-availability, and full visual states",
+        "Book shortcut for available slots",
+        "Book anyway shortcut for full slots",
+        "Booking shortcut preserves openDayId and slotId parameters"
+      ],
+      "routes": [
+        "/admin/reservations/new?openDayId={dayId}&slotId={slotId}"
+      ],
+      "layout": "Date sections with a two-column time-slot card grid and color-coded capacity.",
+      "unresolved": [
+        "Live-update transport and refresh handling",
+        "Threshold for reduced-availability color",
+        "Overbooking permissions, warnings, and enforcement deferred",
+        "Dashboard full-block capacity metric is scoped differently from this multi-date/multi-capacity view"
+      ]
+    },
+    {
+      "name": "Prep Sheet",
+      "observedAt": "/admin/prep-sheet?block={blockId}",
+      "features": [
+        "Menu selector including active and inactive blocks",
+        "Day selector including all days",
+        "Reservation and guest totals",
+        "Search guest name",
+        "Excel export",
+        "CSV export",
+        "Print",
+        "Individually selectable columns",
+        "Date, time, guest, booking creation time, party size, course counts, individual orders, allergies, occasion, private admin note, and phone columns",
+        "Guest visit-count badges with on-record and remembered visit breakdown",
+        "Time-slot subtotals and grand totals",
+        "Horizontal table scrolling",
+        "Pencil affordances in admin-note cells"
+      ],
+      "columns": [
+        "Date",
+        "Time",
+        "Guest",
+        "Created",
+        "Party",
+        "c",
+        "L&B",
+        "V",
+        "Orders",
+        "Allergies",
+        "Occasion",
+        "Admin Note",
+        "Phone"
+      ],
+      "layout": "Wide dense operational table below a filter/export toolbar and column toggles; highlighted rows and horizontal overflow.",
+      "unresolved": [
+        "Exact meaning and configuration of abbreviated course columns",
+        "Meaning of yellow row highlighting",
+        "Inline admin-note editing behavior deferred",
+        "Exports/printing not exercised",
+        "Column selection persistence and export-column rules",
+        "Visit-history detail interaction not exercised"
+      ],
+      "preservation": [
+        "Admin notes are explicitly marked as not visible to the patron",
+        "Retain guest-level course selection and allergy context alongside aggregated course counts"
+      ]
+    },
+    {
+      "name": "User & Menu Analytics",
+      "observedAt": "/admin/analytics/menu",
+      "features": [
+        "Menu selector including inactive menus",
+        "Seat and account totals for selected menu",
+        "Main-course distribution chart",
+        "Waitlist demand section and empty state",
+        "Cancellations by day chart",
+        "Cancellations by slot chart",
+        "Allergy frequency table",
+        "Special events/occasions section and empty state"
+      ],
+      "layout": "Full-width menu selector and totals above a two-column grid of charts, tables, and empty-state panels.",
+      "unresolved": [
+        "Non-empty waitlist and special-event analytics states",
+        "Chart hover/interactive behavior not exercised",
+        "Aggregation definitions and free-text allergy normalization",
+        "Per-menu dashboard shortcut selection context not verified"
+      ]
+    }
+  ],
+  "nextSteps": [
+    "Use this inventory to agree on redesign scope and visual direction with the user.",
+    "Obtain the actual application source; the local folder originally contained no application code, and the connected repository search found no matches.",
+    "Build a route/control preservation checklist against the source before implementation.",
+    "Preserve menu/date context, search, filters, pagination, statuses, overbooking entry points, membership entitlements, private notes, and prep exports.",
+    "Obtain deferred edit-form and backend rule details later when the user is comfortable providing them.",
+    "Review remaining uninspected views if needed: users, cancellations, holds, reviews, private events, logs, notifications/account options, and grouped waitlist views.",
+    "Validate implementation using local or staging data; continue honoring the prohibition on agent interaction with live admin elements."
+  ],
+  "designObservations": [
+    "Navigation category tabs change the left panel while dashboard metrics stay visible.",
+    "Reservation list uses a narrow single column and tall grouped cards; redesign should preserve date/time grouping while making scanning efficient.",
+    "Several dashboard menu labels and inactive indicators are truncated in the current viewport.",
+    "Metric scopes need explicit labels; operational totals and full-menu totals are different.",
+    "Summary counts changed during observation; stored observations describe capabilities rather than a stable data snapshot.",
+    "Cancellation and no-show charging are separate actions and must remain distinguishable.",
+    "Menu Blocks Private and Pop-up tab labels are exposed in the accessibility tree but not legible in the captured screenshot."
+  ],
+  "initialDesignDirection": [
+    "Persistent navigation across operational screens.",
+    "Dashboard prioritizing upcoming service, reservation workload, capacity, waitlist, and prep access.",
+    "Clear menu/date scope for metrics and legible menu names/status labels.",
+    "Consistent searchable/filterable lists while preserving date/time grouping where useful.",
+    "Keep Prep Sheet as a wide operational table with selectable columns, private notes, and export/print actions."
+  ],
+  "observationOnly": [
+    "Only screenshots, accessibility-tree reads, and DOM metadata reads were used during the walkthrough.",
+    "All navigation was performed by the user.",
+    "No live controls clicked or changed by agent; no forms submitted; no exports/prints/charges/deletions tested.",
+    "No customer identities or contact values retained in this inventory."
+  ],
+  "prototypeFollowup": {
+    "date": "2026-10-28",
+    "status": "Local mock prototype implemented; production remains untouched.",
+    "url": "http://127.0.0.1:5173",
+    "coverage": "prototype-coverage.json",
+    "handoff": "PROTOTYPE_NOTES.txt",
+    "remotePreview": "Private preview supported; runtime details excluded from source control.",
+    "sourceStack": "User reports Next.js pre-auth and Angular post-auth; prototype is framework-independent."
+  }
+}

@@ -1,0 +1,58 @@
+Daniel x Claire admin prototype
+
+CURRENT STATE
+A working local prototype with fictional data. The original production application
+source is not present. The live site uses Next.js before authentication and
+Angular after authentication. No production code or data was changed.
+
+Run npm run dev (npm.cmd run dev on Windows PowerShell), or node server.mjs.
+Preview: http://127.0.0.1:5173. No dependency installation is required.
+Run npm test and npm run check before changes are committed.
+
+COVERAGE
+17 screens cover service overview; reservations; availability; waitlist;
+cancellations; holds; prep; menus; slots; guests; memberships; plans; content
+and policies; reviews; private events; analytics; and change log.
+Working mock flows include booking edits and main courses, private notes,
+service status, capacity and explicit overbooking, hold/waitlist conversion,
+configuration forms, membership grants, review moderation, events, and exports.
+The original feature inventory is in admin-review.json. Prototype scope and
+validation are recorded in prototype-coverage.json. Screenshots are in artifacts/.
+
+ASSUMPTIONS
+Unseen edit forms and backend behavior are proposed mock flows. Confirm actual
+field requirements, permissions, no-show fees, cancellation holds, membership
+entitlements, review moderation, and event rules before integration.
+Default mock cancellations create a hold unless Skip holds on cancellation is on.
+Hold expiry is informational; no background expiry worker runs.
+Membership benefits are configurable but billing and eligibility are disconnected.
+The late-cancellation window is editable but payment enforcement is not implemented.
+Contact actions copy fictional contact details. They do not send messages.
+
+ACCESSIBILITY AND VALIDATION
+Semantic navigation/tables; skip link; labeled controls; keyboard focus;
+native modal dialogs with Escape and focus recovery; announced validation;
+mobile navigation with focus containment and inert background; reduced motion;
+independently scrolling wide tables; analytics accompanied by text values.
+This is not a certified accessibility audit.
+13 automated checks and syntax checks passed for the initial implementation.
+Browser verification covered booking creation/totals, search/detail, courses and
+notes in prep, simulated no-show, holds and waitlist conversion, plan creation and
+membership grant, content saves, review moderation, private inquiries, validation,
+phone-sized navigation, and independent Excel ZIP/XML validation.
+The demo was restored to its starting scenario after QA.
+
+REMOTE PREVIEW
+Port 5173 can be forwarded privately through VS Code or Microsoft Dev Tunnels.
+An active temporary tunnel may already be running. Its current URL, process
+session, and identity metadata are in ignored .preview/tunnel.json.
+Keep the server/tunnel running while the owner is reviewing remotely.
+Do not commit runtime metadata or credentials. Historical chat-specific setup
+notes are retained locally in .preview/session-notes-before-git.txt.
+
+CONTINUATION
+The owner wants to preserve this baseline before exploring design variations.
+Do not interact with the live admin page. The original walkthrough was read-only;
+the owner deferred edit-form inspection as a guest admin. Use the documented
+inventory and mock prototype until real source or additional details are provided.
+No native .gears/project.yaml binding exists. Do not initialize Gears automatically.
