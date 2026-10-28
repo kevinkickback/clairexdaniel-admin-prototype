@@ -7,6 +7,15 @@
       "label": "Original baseline",
       "ref": "prototype-v1",
       "screenshot": "artifacts/dashboard-desktop.jpg"
+    },
+    {
+      "id": "calm-service",
+      "title": "Calm service",
+      "description": "A quieter daily workspace, with the same restaurant tools. Start with the essentials and open the details when you need them.",
+      "label": "Prototype 02 · Simpler workspace",
+      "ref": "working-tree",
+      "screenshot": "artifacts/calm-service-desktop.jpg",
+      "files": ["shell.js", "calm.css", "images/dining-room.png", "images/seasonal-menu.png"]
     }
   ]
 }

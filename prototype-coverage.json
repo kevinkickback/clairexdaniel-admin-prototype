@@ -48,7 +48,7 @@
     "Per-menu booked seats against configured total capacity"
   ],
   "automatedTests": {
-    "passed": 13,
+    "passed": 23,
     "syntaxChecks": "passed"
   },
   "browserVerified": [
@@ -100,5 +100,20 @@
     "authenticatedHttpStatus": 200,
     "appScriptHttpStatus": 200,
     "scope": "Temporary owner-authenticated preview of port 5173 only"
-  }
+  },
+  "activePrototype": "calm-service",
+  "sourceBranch": "prototype/calm-service",
+  "comparisonPath": "/library/",
+  "baselineTag": "prototype-v1",
+  "secondPrototypeVerified": [
+    "All 17 routes in grouped navigation",
+    "Booking with disclosed guest preferences",
+    "Editing restores allergy and note values",
+    "Notes and allergy propagate to prep",
+    "Search and disclosed status filtering",
+    "Menu editor and generated image loading",
+    "Phone layout without page-wide overflow",
+    "Grouped mobile navigation focus wrapping and Escape recovery",
+    "Both packaged designs and library return link"
+  ]
 }

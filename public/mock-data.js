@@ -1,5 +1,5 @@
 export const TODAY = '2026-10-28';
-export const STORAGE_KEY = 'dxc-admin-prototype-v1';
+export const STORAGE_KEY = 'dxc-admin-prototype-v2';
 const names = ['Avery Ellis','Rowan Brooks','Jordan Vale','Morgan Reed','Quinn Rivers','Riley Stone','Sage Monroe','Taylor Finch','Emerson Lake','Casey Rowan','Jamie West','Parker Bell','Alex Linden','Drew Hart','Cameron Wells','Blair Hayes','Reese Arden','Finley Moss','Charlie Hale','Skyler Lane','Robin Frost','Dakota Wynn','Marley Fox','Remy Cole'];
 export function createSeed() {
   const slots = ['17:30','18:00','18:30','19:00','19:30','20:00'].map((time,i) => ({id:'s'+i,time}));

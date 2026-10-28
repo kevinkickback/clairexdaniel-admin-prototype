@@ -9,7 +9,7 @@
     "build:pages": "node scripts/build-pages.mjs",
     "preview:pages": "node scripts/preview-pages.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check server.mjs && node --check public/app.js && node --check public/views.js && node --check public/ui.js && node --check public/domain.js && node --check public/mock-data.js && node --check public/exports.js && node --check scripts/build-pages.mjs && node --check scripts/preview-pages.mjs"
+    "check": "node --check server.mjs && node --check public/app.js && node --check public/views.js && node --check public/shell.js && node --check public/ui.js && node --check public/domain.js && node --check public/mock-data.js && node --check public/exports.js && node --check scripts/build-pages.mjs && node --check scripts/preview-pages.mjs"
   },
   "description": "Local restaurant administration prototype. Fictional data; no external services."
 }

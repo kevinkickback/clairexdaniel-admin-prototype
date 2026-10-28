@@ -82,3 +82,41 @@ form opens without console errors, and the gallery fits a phone viewport without
 page overflow. Screenshot: artifacts/prototype-library.jpg. No mock records were
 changed during this pass. The temporary port-5174 QA server can be stopped; the
 owner's original private port-5173 preview must remain available.
+
+PROTOTYPE 02: CALM SERVICE (2026-10-28)
+Implemented on branch prototype/calm-service. All 17 routes and existing mock
+actions remain. The root private preview now shows this second design. The first
+design is still pinned to unchanged tag prototype-v1; compare both at /library/.
+Run npm run build:pages to refresh the gallery after changes. The development
+server serves dist at /library/ while public/ remains the live-refresh root.
+No Pages publishing or repository visibility change is authorized yet.
+
+Design: three primary navigation links and four expandable tool groups. The home
+screen shows three service totals, five bookings, and before-service needs.
+Seating bars and cross-menu/guest metrics moved into native disclosures. All
+original overview metrics remain available. Reservation filters are disclosed;
+an Applied label signals active filtering. Optional guest preferences and notes
+are collapsed for a new booking and expanded when existing values are present.
+The reservation table drops the duplicate notes column; dietary warnings remain
+visible with the guest name, while private notes and courses remain in details.
+Menus use quieter editorial rows, with one food photograph. A dining-room image
+adds context to the overview. Both images were generated with the built-in tool;
+they do not depict the actual venue/dishes. Full prompts: artifacts/image-prompts.txt.
+
+New code: public/shell.js and public/calm.css. New browser storage key ends in v2.
+Pages build copies explicitly listed extra assets from each manifest entry and
+rewrites the library return link for nested hosting. No dev-only files are copied.
+
+Validation: 23 automated checks and syntax checks pass. Browser QA verified a
+mock booking with optional allergy/private note, capacity updates, search/status
+filtering, editing with preferences expanded, and the saved note/allergy in prep.
+The photographed menu still opens the complete editor. The packaged gallery
+loads both prototypes, its images, and the return link without console errors.
+Phone viewport has no page-wide overflow. Fixed a focus-trap issue by explicitly
+excluding links inside closed details; Tab/Shift+Tab wrap among visible controls,
+and Escape restores the navigation opener. Demo data restored after QA.
+Visual baselines: artifacts/calm-service-desktop.jpg, calm-service-full.jpg,
+and calm-service-mobile.jpg. Keep the private server and existing tunnel running.
+Checkpoint tag: prototype-v2. For a third design, pin the calm-service gallery
+entry to that tag before changing public/, and add a new working-tree entry.
+Also verified the disclosed reservation filters stay within a 320px viewport.

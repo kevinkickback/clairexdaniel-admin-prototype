@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 import { buildSite } from '../scripts/build-pages.mjs';
 
 const project = fileURLToPath(new URL('../', import.meta.url));
-const prototype = { id:'baseline', title:'Service & seating', description:'Try the daily workflows.', label:'Baseline', ref:'working-tree', screenshot:'artifacts/dashboard-desktop.jpg' };
+const prototype = { id:'baseline', title:'Service & seating', description:'Try the daily workflows.', label:'Baseline', ref:'working-tree', screenshot:'artifacts/dashboard-desktop.jpg', files:['shell.js','calm.css','images/dining-room.png','images/seasonal-menu.png'] };
 async function fixture(t, prototypes = [prototype]) {
   const root = await mkdtemp(join(tmpdir(), 'dxc-pages-test-'));
   t.after(async () => {
@@ -27,7 +27,7 @@ test('Pages output contains only allowlisted browser assets with portable projec
   await writeFile(join(root, 'public/private-notes.txt'), 'Not for publishing');
   const result = await buildSite(root);
   const files = (await readdir(result.directory, { recursive:true })).map(path => path.replaceAll('\\', '/'));
-  assert.equal(result.files, 12);
+  assert.equal(result.files, 16);
   assert.ok(files.includes('.nojekyll'));
   assert.ok(!files.some(path => /private-notes|dev-reload|server\.mjs|admin-review|\.git/.test(path)));
   const html = await readFile(join(result.directory, 'prototypes/baseline/index.html'), 'utf8');
@@ -43,6 +43,8 @@ test('Pages output contains only allowlisted browser assets with portable projec
   const gallery = await readFile(join(result.directory, 'index.html'), 'utf8');
   assert.match(gallery, /Service &amp; seating/);
   assert.match(gallery, /href="\.\/prototypes\/baseline\/"/);
+  assert.match(await readFile(join(result.directory, 'prototypes/baseline/shell.js'), 'utf8'), /href="\.\.\/\.\.\/"/);
+  assert.ok(files.includes('prototypes/baseline/images/dining-room.png'));
 });
 
 test('Variants have separate stable browser storage and escaped gallery content', async t => {
@@ -52,7 +54,7 @@ test('Variants have separate stable browser storage and escaped gallery content'
     const data = await readFile(join(root, 'dist/prototypes', id, 'mock-data.js'), 'utf8');
     assert.match(data, new RegExp(`STORAGE_KEY = 'dxc-pages-${id}'`));
   }
-  assert.match(await readFile(join(root, 'public/mock-data.js'), 'utf8'), /dxc-admin-prototype-v1/);
+  assert.equal(await readFile(join(root, 'public/mock-data.js'), 'utf8'), await readFile(join(project, 'public/mock-data.js'), 'utf8'));
   assert.match(await readFile(join(root, 'dist/index.html'), 'utf8'), /&lt;Design &quot;B&quot;&gt;/);
 });
 
@@ -74,7 +76,7 @@ test('Invalid manifests fail before replacing an existing build', async t => {
   const root = await fixture(t);
   await mkdir(join(root, 'dist'));
   await writeFile(join(root, 'dist/keep.txt'), 'Previous valid output');
-  for (const entries of [[{ ...prototype, id:'../escape' }], [prototype, prototype], [{ ...prototype, screenshot:'artifacts/../private.png' }], [{ ...prototype, ref:'--help' }]]) {
+  for (const entries of [[{ ...prototype, id:'../escape' }], [prototype, prototype], [{ ...prototype, screenshot:'artifacts/../private.png' }], [{ ...prototype, ref:'--help' }], [{ ...prototype, files:['../admin-review.json'] }], [{ ...prototype, files:['dev-reload.js'] }]]) {
     await writeFile(join(root, 'prototypes.json'), JSON.stringify({ prototypes:entries }));
     await assert.rejects(buildSite(root), /Invalid|duplicate/);
     assert.equal(await readFile(join(root, 'dist/keep.txt'), 'utf8'), 'Previous valid output');

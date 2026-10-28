@@ -12,6 +12,8 @@ npm run dev
 
 Open <http://127.0.0.1:5173>. On Windows PowerShell, `npm.cmd run dev` also avoids script execution-policy issues. VS Code includes a **Preview restaurant admin** task.
 
+The active second design is **Calm service**. After `npm run build:pages`, open <http://127.0.0.1:5173/library/> (also linked in the dashboard header) to compare it with the preserved **Service desk** baseline. Both versions use fictional data and separate browser storage. The same `/library/` path works through the existing private preview tunnel. Rebuild the library after changes; the root dashboard refreshes automatically during development.
+
 The development server refreshes the browser when files in `public/` change. Mock changes persist in browser local storage; **Reset demo** restores the starting scenario for October 28, 2026.
 
 ## Included workflows
@@ -40,6 +42,8 @@ The tests cover reservation validation, capacity and holds, explicit overbooking
 | Path | Purpose |
 | --- | --- |
 | `public/` | Interface, mock data, domain logic, and export helpers |
+| `public/shell.js`, `public/calm.css` | Grouped navigation and the second prototype’s visual direction |
+| `public/images/` | Generated restaurant and food concept images |
 | `server.mjs` | Read-only static development server and refresh stream |
 | `tests/` | Domain and rendering checks |
 | `admin-review.json` | Inventory from the original admin walkthrough |
@@ -61,6 +65,16 @@ The existing site uses Next.js before authentication and Angular after authentic
 Unseen forms and business rules are proposed mock flows that need validation against the real application. Payments, authentication, email, subscription eligibility, and background hold expiry are not connected. Hold expiry times are informational; cancellation holds and no-show fees are configurable simulations.
 
 The live admin site must remain untouched during prototype work. Preserve the original functional inventory when developing variations.
+
+## Second prototype: Calm service
+
+This variation keeps all 17 screens and the existing mock workflows. The overview prioritizes three service totals and a short reservation list. Seating by time and restaurant-wide insights open on demand. Native navigation disclosures group the less frequent tools; dietary notes remain visible in guest rows. Reservation filters and optional guest preferences are also disclosed when needed, with existing preferences expanded when editing.
+
+Images appear in the selected-service context and the Mediterranean menu preview. These are generated concept images, not photographs of the actual restaurant or its actual food. The saved asset paths, full prompts, and generation method are in `artifacts/image-prompts.txt`.
+
+The active implementation lives on `prototype/calm-service`, with checkpoint tag `prototype-v2`; `prototype-v1` remains unchanged. The root development preview and the packaged gallery version use separate storage, so they can be tried independently. The second design has been checked for booking creation/editing, optional notes, prep-sheet propagation, filtering, menu editing, image loading, mobile layout, and keyboard containment in the grouped mobile navigation.
+
+Before starting a third design, pin the `calm-service` gallery entry to `prototype-v2`, then add a separate entry with `ref: "working-tree"`. This keeps both completed designs intact as the next one changes.
 
 ## Prototype library and future GitHub Pages hosting
 

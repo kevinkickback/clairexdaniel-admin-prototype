@@ -1,0 +1,11 @@
+PROTOTYPE 02 IMAGE ASSETS
+
+Created with the built-in image-generation tool. These are generated concept images, not photographs of the actual venue or its actual dishes.
+
+Visual direction: warm paper, walnut and olive, with photography confined to the service context and one menu preview. The working surface remains primary. Native disclosures reduce clutter; existing drawer transitions and subtle control states provide restrained motion and honor reduced motion.
+
+public/images/dining-room.png
+Use case: photorealistic-natural. Asset type: landscape editorial restaurant photograph used sparingly in a restaurant admin dashboard. Primary request: an inviting intimate restaurant dining room prepared for evening service, natural walnut table in foreground, simple white ceramic plates, linen napkins, clear stemmed glassware, a small olive branch arrangement, soft olive-green upholstered banquette, plaster walls, warm late-afternoon window light. Composition: wide horizontal 3:2 frame, coherent real interior, table and glassware in focus, restrained shallow depth of field, no people, no signage or typography, no UI. Mood: calm, tactile, understated hospitality. Realistic photography, subtle film grain, warm ivory and olive palette. Do not imply this is a photograph of a specific real restaurant. No text, watermark, logos, excessive decoration.
+
+public/images/seasonal-menu.png
+Use case: photorealistic-natural. Asset type: landscape editorial food photograph for a restaurant menu card inside an admin prototype. Primary request: one elegant Mediterranean seasonal dinner on an off-white handmade ceramic plate: sliced roasted chicken with golden skin, bright herbs, charred lemon and vegetables, a small swirl of pale sauce, modest portions beautifully plated. Background: natural walnut dining table with a folded olive linen napkin and softly out-of-focus stemware. Composition: horizontal 3:2 photograph, 45-degree camera angle, plate centered and large, soft warm window light, realistic texture, subtle film grain. Mood: understated independent restaurant hospitality. No people, hands, words, signage, logos, watermark, UI or graphics. Do not add text.

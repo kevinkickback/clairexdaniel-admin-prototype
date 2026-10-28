@@ -21,6 +21,8 @@ export async function buildSite(root = projectRoot) {
     const { id, title, description, label, ref, screenshot } = prototype;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]{0,47}$/.test(id) || ids.has(id)) throw new Error(`Invalid or duplicate prototype id: ${id}`);
     ids.add(id);
+    const extraFiles = prototype.files ?? [];
+    if (!Array.isArray(extraFiles) || extraFiles.some(path => typeof path !== 'string' || !/^(?:shell\.js|calm\.css|images\/[a-z0-9-]+\.(?:jpg|png|webp))$/.test(path))) throw new Error(`Invalid additional browser asset for ${id}.`);
     for (const [name, value] of Object.entries({ title, description, label, ref, screenshot })) {
       if (typeof value !== 'string' || !value.trim()) throw new Error(`Missing ${name} for ${id}.`);
     }
@@ -32,7 +34,7 @@ export async function buildSite(root = projectRoot) {
       ? Promise.resolve(execFileSync('git', ['show', `${revision}:${path}`], { cwd:root, maxBuffer:8 * 1024 * 1024, windowsHide:true }))
       : readFile(join(root, path));
 
-    for (const name of browserFiles) {
+    for (const name of new Set([...browserFiles,...extraFiles])) {
       let body = await source(`public/${name}`);
       if (name === 'index.html') {
         body = body.toString('utf8')
@@ -47,6 +49,7 @@ export async function buildSite(root = projectRoot) {
         // Stable per-design storage; refreshing a deployment preserves that design's edits.
         body = body.replace(declaration, `export const STORAGE_KEY = 'dxc-pages-${id}';`);
       }
+      if (name === 'shell.js') body = body.toString('utf8').replace('href="/library/"', 'href="../../"');
       output.set(`prototypes/${id}/${name}`, body);
     }
     const extension = screenshot.slice(screenshot.lastIndexOf('.'));

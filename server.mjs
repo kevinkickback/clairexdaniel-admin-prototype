@@ -5,9 +5,10 @@ import { resolve, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('./public/', import.meta.url));
+const libraryRoot = fileURLToPath(new URL('./dist/', import.meta.url));
 const port = Number(process.env.PORT || 5173);
 const host = process.env.HOST || '127.0.0.1';
-const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.json': 'application/json' };
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.json': 'application/json', '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp' };
 const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; form-action 'none'; object-src 'none'; base-uri 'self'";
 const liveClients = new Set();
 const server = http.createServer(async (req, res) => {
@@ -23,8 +24,12 @@ const server = http.createServer(async (req, res) => {
   if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); res.end('This prototype has no server-side write endpoints.'); return; }
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-    const file = resolve(root, '.' + (pathname === '/' ? '/index.html' : pathname));
-    if (!file.startsWith(root.endsWith(sep) ? root : root + sep)) { res.writeHead(403); res.end(); return; }
+    if (pathname === '/library') { res.writeHead(302, { Location:'/library/' }); res.end(); return; }
+    const isLibrary = pathname.startsWith('/library/');
+    const selectedRoot = isLibrary ? libraryRoot : root;
+    const relativePath = isLibrary ? pathname.slice('/library'.length) : pathname;
+    const file = resolve(selectedRoot, '.' + relativePath + (relativePath.endsWith('/') ? 'index.html' : ''));
+    if (!file.startsWith(selectedRoot.endsWith(sep) ? selectedRoot : selectedRoot + sep)) { res.writeHead(403); res.end(); return; }
     if (!(await stat(file)).isFile()) throw new Error('Not a file');
     const body = await readFile(file);
     res.writeHead(200, { 'Content-Type': `${types[extname(file)] || 'application/octet-stream'}; charset=utf-8` });
