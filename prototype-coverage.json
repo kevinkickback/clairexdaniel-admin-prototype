@@ -48,7 +48,7 @@
     "Per-menu booked seats against configured total capacity"
   ],
   "automatedTests": {
-    "passed": 23,
+    "passed": 25,
     "syntaxChecks": "passed"
   },
   "browserVerified": [
@@ -101,8 +101,8 @@
     "appScriptHttpStatus": 200,
     "scope": "Temporary owner-authenticated preview of port 5173 only"
   },
-  "activePrototype": "calm-service",
-  "sourceBranch": "prototype/calm-service",
+  "activePrototype": "service-studio",
+  "sourceBranch": "prototype/service-studio",
   "comparisonPath": "/library/",
   "baselineTag": "prototype-v1",
   "secondPrototypeVerified": [
@@ -115,5 +115,16 @@
     "Phone layout without page-wide overflow",
     "Grouped mobile navigation focus wrapping and Escape recovery",
     "Both packaged designs and library return link"
+  ],
+  "thirdPrototypeVerified": [
+    "All 17 routes in five horizontal sections",
+    "Time board with per-slot reservations and capacity",
+    "Time-slot booking creates a party in the correct column",
+    "Course edits and allergy/private-note propagation to prep",
+    "Section links and membership/content/reporting tools",
+    "Independent horizontal scrolling at 320px without document overflow",
+    "Active far-end section/tool links remain visible",
+    "Offscreen booking button keyboard entry and Escape focus recovery",
+    "Prototype 1 responsive library header link and return path"
   ]
 }

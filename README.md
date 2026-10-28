@@ -12,7 +12,7 @@ npm run dev
 
 Open <http://127.0.0.1:5173>. On Windows PowerShell, `npm.cmd run dev` also avoids script execution-policy issues. VS Code includes a **Preview restaurant admin** task.
 
-The active second design is **Calm service**. After `npm run build:pages`, open <http://127.0.0.1:5173/library/> (also linked in the dashboard header) to compare it with the preserved **Service desk** baseline. Both versions use fictional data and separate browser storage. The same `/library/` path works through the existing private preview tunnel. Rebuild the library after changes; the root dashboard refreshes automatically during development.
+The active third design is **Service studio**. After `npm run build:pages`, open <http://127.0.0.1:5173/library/> (linked in every prototype’s header) to compare it with **Service desk** and **Calm service**. Each version uses fictional data and separate browser storage. The same `/library/` path works through the existing private preview tunnel. Rebuild the library after changes; the root dashboard refreshes automatically during development.
 
 The development server refreshes the browser when files in `public/` change. Mock changes persist in browser local storage; **Reset demo** restores the starting scenario for October 28, 2026.
 
@@ -42,7 +42,8 @@ The tests cover reservation validation, capacity and holds, explicit overbooking
 | Path | Purpose |
 | --- | --- |
 | `public/` | Interface, mock data, domain logic, and export helpers |
-| `public/shell.js`, `public/calm.css` | Grouped navigation and the second prototype’s visual direction |
+| `public/shell.js`, `public/studio.css` | Horizontal navigation and the third prototype’s visual direction |
+| `public/calm.css` | Second prototype stylesheet retained in history and its pinned version |
 | `public/images/` | Generated restaurant and food concept images |
 | `server.mjs` | Read-only static development server and refresh stream |
 | `tests/` | Domain and rendering checks |
@@ -76,7 +77,17 @@ Images appear in the selected-service context and the Mediterranean menu preview
 
 The active implementation lives on `prototype/calm-service`, with current checkpoint tag `prototype-v2.1`; the original `prototype-v2` checkpoint and `prototype-v1` remain unchanged. The root development preview and the packaged gallery version use separate storage, so they can be tried independently. The second design has been checked for booking creation/editing, optional notes, prep-sheet propagation, filtering, menu editing, image loading, mobile layout, and keyboard containment in the grouped mobile navigation.
 
-Before starting a third design, pin the `calm-service` gallery entry to `prototype-v2.1`, then add a separate entry with `ref: "working-tree"`. This keeps both completed designs intact as the next one changes.
+The gallery entry is now pinned to `prototype-v2.1` so the third prototype can evolve independently.
+
+## Third prototype: Service studio
+
+This design uses horizontal section navigation and a second row for the current section’s tools. A full-width time board replaces the home reservation table: each party opens the existing detail drawer, and each time column starts a booking with that time selected. Counts, active holds, capacity overrides, dietary notes, statuses, prep, and all 17 routes remain available. Other screens share a warm neutral and terracotta visual direction, with flatter surfaces and menu cards.
+
+On phones, navigation rows and the time board scroll within their own regions. Active section/tool links scroll into view horizontally without moving the page vertically. The board supports keyboard access to offscreen parties and booking buttons. The existing dialogs retain Escape and focus recovery. No sidebar or mobile navigation overlay is used in this design.
+
+The active implementation is on `prototype/service-studio`, checkpoint `prototype-v3`. Before starting a fourth design, pin the `service-studio` gallery entry to that tag and add a new working-tree entry. The earlier checkpoint tags remain untouched.
+
+Prototype 1’s library header link is added during packaging via `legacyLibraryLink`, with a guard that requires exactly one compatible header. This keeps its original source tag intact while updating the version shown in the library. Gallery screenshots are read from the current manifest checkout, independently of the pinned application ref, so documentation and shared header updates can be reflected without changing a frozen source tag.
 
 ## Prototype library and future GitHub Pages hosting
 

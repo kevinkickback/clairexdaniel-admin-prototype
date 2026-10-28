@@ -4,18 +4,28 @@
       "id": "service-desk",
       "title": "Service desk",
       "description": "Daily service and restaurant operations in one workspace. Explore reservations, menus, memberships, and the tools around them.",
-      "label": "Original baseline",
+      "label": "Prototype 01 · Detailed workspace",
       "ref": "prototype-v1",
-      "screenshot": "artifacts/dashboard-desktop.jpg"
+      "screenshot": "artifacts/dashboard-desktop.jpg",
+      "legacyLibraryLink": true
     },
     {
       "id": "calm-service",
       "title": "Calm service",
       "description": "A quieter daily workspace, with the same restaurant tools. Start with the essentials and open the details when you need them.",
       "label": "Prototype 02 · Simpler workspace",
-      "ref": "working-tree",
+      "ref": "prototype-v2.1",
       "screenshot": "artifacts/calm-service-desktop.jpg",
       "files": ["shell.js", "calm.css", "images/dining-room.png", "images/seasonal-menu.png"]
+    },
+    {
+      "id": "service-studio",
+      "title": "Service studio",
+      "description": "A full-width service board organized by time, with horizontal navigation and direct access to every party and restaurant tool.",
+      "label": "Prototype 03 · Horizontal workspace",
+      "ref": "working-tree",
+      "screenshot": "artifacts/service-studio-desktop.jpg",
+      "files": ["shell.js", "studio.css", "images/dining-room.png", "images/seasonal-menu.png"]
     }
   ]
 }

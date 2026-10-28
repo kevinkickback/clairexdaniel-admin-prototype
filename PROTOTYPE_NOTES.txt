@@ -135,3 +135,42 @@ Desktop/mobile snapshots and the private library were refreshed.
 Current checkpoint is prototype-v2.1; keep prior v1 and v2 tags unchanged.
 For a third prototype, pin calm-service to prototype-v2.1, not the earlier v2 tag.
 Keep publication off and the existing private dev server/tunnel running.
+
+PROTOTYPE 03: SERVICE STUDIO (2026-10-28)
+Active branch: prototype/service-studio; planned/saved checkpoint: prototype-v3.
+All 17 routes remain. Replaced the sidebar with five horizontal sections (Service,
+Menus, Guests, Website, Reports) and a second row for the selected section's tools.
+The overview is a six-column board grouped by time, with clickable party cards,
+slot capacity/holds, dietary flags, and per-time booking entry points. Shared
+forms and domain logic remain. Compact service totals, prep/holds links, selected
+menu imagery, and expandable cross-menu/guest metrics preserve original coverage.
+The visual direction uses terracotta, warm neutral surfaces, and a full-width
+workspace. New stylesheet public/studio.css; public/shell.js is now horizontal.
+Storage key ends in v3; each packaged design also has its own storage namespace.
+
+prototypes.json now pins Calm service to prototype-v2.1. Service studio uses the
+working tree. For prototype 4, pin Service studio to prototype-v3 first. The v1,
+v2, and v2.1 tags are unchanged. Do not overwrite checkpoint tags.
+
+The requested Prototype 1 header library link is supplied by a guarded packaging
+adapter (legacyLibraryLink=true), not by changing the frozen v1 tag. The adapter
+adds a relative link to the existing topbar and responsive styles. Its desktop
+and phone link were verified to return to /library/. Gallery snapshots now read
+from the manifest checkout, so header-only visual updates can be refreshed without
+rewriting immutable app refs. The original dashboard screenshot was refreshed.
+
+Validation: 25 automated checks pass, including every route, horizontal group
+coverage, board records and filters, domain workflows, frozen revisions, static
+packaging, and the legacy header adapter. Browser QA created a booking directly
+in the 8 PM column, verified updated totals/capacity and its party card, opened
+details, edited a course, and confirmed allergy/private note/course propagation
+to prep. Verified menus, guest/membership, website, and reporting navigation.
+At 320px the document stays within its width; menus/board scroll independently,
+active far-end sections/tools remain visible, and keyboard Enter opens an offscreen
+time-slot booking dialog. Escape restores that booking button's focus. Also checked
+narrow content/menu management screens. No console errors. Restored the seed data.
+Screenshots: artifacts/service-studio-desktop.jpg, service-studio-full.jpg,
+service-studio-mobile.jpg. The private server/tunnel remain on port 5173. Rebuild
+dist with npm run build:pages after changes. No publishing/visibility change is
+authorized; keep this repository and its preview private, and never touch the live
+restaurant admin page. This project still has no native Gears binding.

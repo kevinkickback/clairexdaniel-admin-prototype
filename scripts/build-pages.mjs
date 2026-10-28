@@ -22,7 +22,8 @@ export async function buildSite(root = projectRoot) {
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]{0,47}$/.test(id) || ids.has(id)) throw new Error(`Invalid or duplicate prototype id: ${id}`);
     ids.add(id);
     const extraFiles = prototype.files ?? [];
-    if (!Array.isArray(extraFiles) || extraFiles.some(path => typeof path !== 'string' || !/^(?:shell\.js|calm\.css|images\/[a-z0-9-]+\.(?:jpg|png|webp))$/.test(path))) throw new Error(`Invalid additional browser asset for ${id}.`);
+    if (!Array.isArray(extraFiles) || extraFiles.some(path => typeof path !== 'string' || !/^(?:shell\.js|calm\.css|studio\.css|images\/[a-z0-9-]+\.(?:jpg|png|webp))$/.test(path))) throw new Error(`Invalid additional browser asset for ${id}.`);
+    if (prototype.legacyLibraryLink !== undefined && typeof prototype.legacyLibraryLink !== 'boolean') throw new Error(`Invalid legacy library option for ${id}.`);
     for (const [name, value] of Object.entries({ title, description, label, ref, screenshot })) {
       if (typeof value !== 'string' || !value.trim()) throw new Error(`Missing ${name} for ${id}.`);
     }
@@ -50,10 +51,18 @@ export async function buildSite(root = projectRoot) {
         body = body.replace(declaration, `export const STORAGE_KEY = 'dxc-pages-${id}';`);
       }
       if (name === 'shell.js') body = body.toString('utf8').replace('href="/library/"', 'href="../../"');
+      if (prototype.legacyLibraryLink && name === 'app.js') {
+        const marker = '<div class="topbar-actions">';
+        body = body.toString('utf8');
+        if (body.split(marker).length !== 2) throw new Error(`Expected one legacy header in ${id}.`);
+        body = body.replace(marker, marker + '<a class="prototype-library-link" href="../../" aria-label="Prototype library">${icon(\'grid\')}<span class="prototype-library-text">Prototype library</span></a>');
+      }
+      if (prototype.legacyLibraryLink && name === 'styles.css') body = body.toString('utf8') + '\n.prototype-library-link{display:inline-flex;align-items:center;gap:7px;min-height:38px;white-space:nowrap;text-decoration:none;font-size:12px;color:var(--forest)}.prototype-library-link .icon{width:16px;height:16px}.prototype-library-link:hover{text-decoration:underline}@media(max-width:760px){.prototype-library-text,.topbar .demo-label{display:none}.prototype-library-link{min-width:34px;justify-content:center}}\n';
       output.set(`prototypes/${id}/${name}`, body);
     }
     const extension = screenshot.slice(screenshot.lastIndexOf('.'));
-    output.set(`assets/${id}${extension}`, await source(screenshot));
+    // Gallery snapshots belong to this manifest; app code remains pinned to its chosen ref.
+    output.set(`assets/${id}${extension}`, await readFile(join(root, screenshot)));
     const href = `./prototypes/${id}/`;
     entries.push(`<article class="prototype" aria-labelledby="title-${id}">
       <a class="image-link" href="${href}" target="_blank" rel="noopener" aria-label="Open ${escape(title)} prototype (opens in a new tab)"><img src="./assets/${id}${extension}" alt="${escape(title)} dashboard preview" width="1265" height="712"></a>

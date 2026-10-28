@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 import { buildSite } from '../scripts/build-pages.mjs';
 
 const project = fileURLToPath(new URL('../', import.meta.url));
-const prototype = { id:'baseline', title:'Service & seating', description:'Try the daily workflows.', label:'Baseline', ref:'working-tree', screenshot:'artifacts/dashboard-desktop.jpg', files:['shell.js','calm.css','images/dining-room.png','images/seasonal-menu.png'] };
+const prototype = { id:'baseline', title:'Service & seating', description:'Try the daily workflows.', label:'Baseline', ref:'working-tree', screenshot:'artifacts/dashboard-desktop.jpg', files:['shell.js','studio.css','images/dining-room.png','images/seasonal-menu.png'] };
 async function fixture(t, prototypes = [prototype]) {
   const root = await mkdtemp(join(tmpdir(), 'dxc-pages-test-'));
   t.after(async () => {
@@ -87,4 +87,17 @@ test('An incompatible prototype fails visibly rather than sharing another design
   const root = await fixture(t);
   await writeFile(join(root, 'public/mock-data.js'), 'export const data = {};');
   await assert.rejects(buildSite(root), /Expected one STORAGE_KEY declaration/);
+});
+
+test('Legacy headers get a portable library link without altering their original source', async t => {
+  const root = await fixture(t,[{...prototype,legacyLibraryLink:true}]);
+  const original = 'const icon = () => ""; export const header = () => `<div class="topbar-actions"></div>`;';
+  await writeFile(join(root,'public/app.js'),original);
+  await buildSite(root);
+  const output = await readFile(join(root,'dist/prototypes/baseline/app.js'),'utf8');
+  assert.match(output,/class="prototype-library-link" href="\.\.\/\.\.\/" aria-label="Prototype library"/);
+  assert.equal(await readFile(join(root,'public/app.js'),'utf8'),original);
+  assert.match(await readFile(join(root,'dist/prototypes/baseline/styles.css'),'utf8'),/prototype-library-text/);
+  await writeFile(join(root,'public/app.js'),'export const header = () => "No compatible header";');
+  await assert.rejects(buildSite(root),/Expected one legacy header/);
 });
